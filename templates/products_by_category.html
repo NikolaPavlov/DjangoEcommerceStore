@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h2 class='text-center mx-auto'>Category: {{ category.name }}</h2>
+    <br />
+    <div class="card-group">
+        {% for item in items %}
+            {# <a href="{% url 'offer_detail_url' offer.pk %}"> #}
+                <div class="card">
+                    <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.title }} img" class="card-img-top" class="img-fluid" width="300" height="300">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ item.title }}</h4>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text">Price:{{ item.price }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>footer</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            {% include "pagination.html" %}
+        </div>
+    </div>
+
+
+{% endblock content %}
