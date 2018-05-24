@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
+from django.views.generic import DetailView
 
 from .models import Product, Category
 from AbritesTask.helpers import pagination
@@ -31,3 +32,12 @@ def products_by_category(request, pk):
     }
 
     return render(request, 'products_by_category.html', context)
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+    context_object_name = 'product'
+
+    def get_object(self):
+        return get_object_or_404(Product, pk = self.kwargs['pk'])

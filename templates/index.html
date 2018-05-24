@@ -14,7 +14,7 @@
 
     <div class="card-group">
         {% for item in items %}
-            {# <a href="{% url 'offer_detail_url' offer.pk %}"> #}
+            <a href="{% url 'product_detail_url' item.pk %}">
                 <div class="card">
                     <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.name }} img" class="card-img-top" class="img-fluid" width="300" height="300">
                     <div class="card-block">

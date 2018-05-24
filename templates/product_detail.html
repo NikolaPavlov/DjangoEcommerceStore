@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
+            <div class="card-block mx-auto text-center">
+                <strong><h2 class="card-title">{{ product.name }}</h2></strong>
+                <p class="card-text">{{ product.description }}</p>
+                <h3>
+                    Price: <span class="badge badge-info">{{ product.price }}$</span>
+                </h3>
+            </div>
+            <div class='mx-auto text-center'>
+                <a class='btn btn-success' href="#">Add To Cart</a>
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+{% endblock content %}
