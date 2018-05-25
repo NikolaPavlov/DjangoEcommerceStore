@@ -14,6 +14,9 @@
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
 
   <body>
@@ -28,12 +31,12 @@
               <ul class="nav navbar-nav pull-xs-left"> </ul>
 
               <ul class="nav navbar-nav mx-auto">
-                  <li> <a class="nav-link" href="{% url 'cart:cart_home_url' %}">Cart</a> </li>
+                  <li> <a class="nav-link" href="{% url 'cart:cart_home_url' %}"><i class="fas fa-shopping-cart"></i> {{ request.session.cart_items }}</a> </li>
               </ul>
 
               <ul class="nav navbar-nav pull-xs-right">
                   {% if request.user.is_authenticated %}
-                  <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">{{user.username}}</a></li>
+                  <li class="nav-item"><b class="nav-link">{{user.username}}</b></li>
                   <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">LogOut</a></li>
                   {% else %}
                   <li class="nav-item"><a class="nav-link" href="{% url 'signup_url' %}">Register</a></li>
