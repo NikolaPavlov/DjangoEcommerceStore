@@ -25,15 +25,19 @@
           <a class="navbar-brand" href="{% url 'index_url' %}">Abrites Store</a>
 
           <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <ul class="nav navbar-nav pull-xs-left">
+              <ul class="nav navbar-nav pull-xs-left"> </ul>
+
+              <ul class="nav navbar-nav mx-auto">
+                  <li> <a class="nav-link" href="{% url 'cart:cart_home_url' %}">Cart</a> </li>
               </ul>
+
               <ul class="nav navbar-nav pull-xs-right">
                   {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">{{user.username}}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">LogOut</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">{{user.username}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'logout_url' %}">LogOut</a></li>
                   {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'signup_url' %}">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login_url' %}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup_url' %}">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'login_url' %}">Login</a></li>
                   {% endif %}
               </ul>
           </div>

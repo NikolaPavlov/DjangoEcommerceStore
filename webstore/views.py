@@ -4,6 +4,7 @@ from django.views.generic import DetailView
 
 from .models import Product, Category
 from AbritesTask.helpers import pagination
+from cart.models import Cart
 
 
 def products(request):
@@ -35,9 +36,20 @@ def products_by_category(request, pk):
 
 
 class ProductDetailView(DetailView):
-    model = Product
+    # model = Product
     template_name = 'product_detail.html'
-    context_object_name = 'product'
+    # context_object_name = 'product'
+
+    queryset = Product.objects.all()
+
+
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
 
     def get_object(self):
         return get_object_or_404(Product, pk = self.kwargs['pk'])
