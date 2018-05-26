@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'sorl.thumbnail',
 
     'users',
     'webstore',
@@ -131,8 +132,15 @@ AUTH_USER_MODEL = 'users.User'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = 'media/'
 
 
 
 LOGIN_URL = '/users/login'
+
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'image': {'size': (100, 100), 'crop': True},
+    },
+}
