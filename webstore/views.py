@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
 from django.views.generic import DetailView
 
-from .models import Product, Category
 from AbritesTask.helpers import pagination
+
+from .models import Product, Category
 from cart.models import Cart
 
 
@@ -12,10 +12,13 @@ def products(request):
     all_categories = Category.objects.all()
     pages = pagination(request, products, 10)
 
+    print(request.session.__str__())
+
+
     context = {
         'all_categories': all_categories,
         'items': pages[0],
-        'page_range': pages[1]
+        'page_range': pages[1],
     }
 
     return render(request, 'index.html', context)
@@ -67,9 +70,7 @@ def products_in_cat_by_name(request, pk):
 
 
 class ProductDetailView(DetailView):
-    # model = Product
     template_name = 'product_detail.html'
-    # context_object_name = 'product'
 
     queryset = Product.objects.all()
 
@@ -80,6 +81,4 @@ class ProductDetailView(DetailView):
         return context
 
     def get_object(self):
-        return get_object_or_404(Product, pk = self.kwargs['pk'])
-
-
+        return get_object_or_404(Product, pk=self.kwargs['pk'])

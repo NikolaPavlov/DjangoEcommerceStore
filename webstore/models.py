@@ -20,10 +20,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)  # required True
-    description = models.TextField()
-    price = models.IntegerField()
-    category = models.ManyToManyField('Category', blank=True)
-    # image = models.ImageField(null=True, blank=True, upload_to='img/')
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    category = models.ManyToManyField('Category')
     image = ImageField(upload_to='img/')
 
     def __str__(self):

@@ -11,4 +11,6 @@ from cart.models import Cart
 def create_order(request):
     cart_obj, is_new_obj = Cart.objects.new_or_get(request)
     order_obj, is_new_order_obj = Order.objects.get_or_create(cart=cart_obj, user=request.user)
+    request.session.pop('cart_id')
+    request.session.pop('cart_items')
     return render(request, 'thank_you_for_order.html', {'order':order_obj})

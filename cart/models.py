@@ -1,7 +1,8 @@
+from decimal import *
+
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import pre_save, m2m_changed
-from django.dispatch import receiver
+from django.db.models.signals import m2m_changed
 
 from webstore.models import Product
 
@@ -27,7 +28,6 @@ class CartManager(models.Manager):
             request.session['cart_id'] = cart_obj.id
         return cart_obj, is_new_obj
 
-
     def new(self, user=None):
         user_obj = None
         if user is not None:
@@ -35,10 +35,13 @@ class CartManager(models.Manager):
                 user_obj = user
         return self.model.objects.create(user=user_obj)
 
+
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, blank=True)
-    total_price = models.PositiveIntegerField(default=0)
+    # total_price = models.PositiveIntegerField(default=0)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2,
+                                      blank=True,null=True)
 
     objects = CartManager()
 
@@ -49,7 +52,7 @@ class Cart(models.Model):
 def pre_save_cart_receiver(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         products = instance.products.all()
-        total_price = 0
+        total_price = Decimal(0)
         for product in products:
             total_price += product.price
         instance.total_price = total_price

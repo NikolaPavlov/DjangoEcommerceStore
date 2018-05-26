@@ -13,8 +13,6 @@
         {% for item in items %}
             <a href="{% url 'product_detail_url' item.pk %}">
                 <div class="card">
-                    {# <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.name }} img" class="card-img-top" class="img-fluid" width="300" height="300"> #}
-
                     {% thumbnail item.image "200x200" crop="center" as im %}
                         <img src="{{ im.url }}" width="{{ im.width }}" height= "{{ im.height }}" alt="" />
                     {% endthumbnail %}
@@ -22,7 +20,7 @@
                         <h4 class="card-title">{{ item.name }}</h4>
                     </div>
                     <div class="card-footer">
-                        <p>Price:{{ item.price }}$</p>
+                        <p class="badge badge-info">Price:{{ item.price }}$</p>
                     </div>
                 </div>
             </a>
