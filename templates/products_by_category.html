@@ -1,33 +1,30 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 
 
-{% block content %}
-    <h2 class='text-center mx-auto'>Category: {{ category.name }}</h2>
-    <br />
+{% block content_products %}
+
+    <h2 class="text-center"> Category: {{ category }}</h2>
+
+    <a class='btn btn-info' href="{% url 'products_in_cat_by_name_url' category.pk %}">Order By Name</a>
+
     <div class="card-group">
         {% for item in items %}
-            {# <a href="{% url 'offer_detail_url' offer.pk %}"> #}
+            <a href="{% url 'product_detail_url' item.pk %}">
                 <div class="card">
-                    <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.title }} img" class="card-img-top" class="img-fluid" width="300" height="300">
+                    <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.name }} img" class="card-img-top" class="img-fluid" width="300" height="300">
                     <div class="card-block">
-                        <h4 class="card-title">{{ item.title }}</h4>
-                        <p class="card-text">{{ item.description }}</p>
-                        <p class="card-text">Price:{{ item.price }}</p>
+                        <h4 class="card-title">{{ item.name }}</h4>
+                        <p class="card-text">{{ item.description|slice:'100' }}</p>
                     </div>
                     <div class="card-footer">
-                        <p>footer</p>
+                        <p>Price:{{ item.price }}$</p>
                     </div>
                 </div>
             </a>
         {% endfor %}
     </div>
 
-
-    <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-            {% include "pagination.html" %}
-        </div>
-    </div>
+    {% include "pagination.html" %}
 
 
-{% endblock content %}
+{% endblock %}

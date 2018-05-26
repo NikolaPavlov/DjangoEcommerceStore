@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'webstore',
     'cart',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -134,4 +135,4 @@ MEDIA_ROOT = 'media'
 
 
 
-INTERNAL_IPS = ('127.0.0.1',)
+LOGIN_URL = '/users/login'

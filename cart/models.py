@@ -46,7 +46,6 @@ class Cart(models.Model):
         return str(self.id)
 
 
-# @receiver(request_finished)
 def pre_save_cart_receiver(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         products = instance.products.all()

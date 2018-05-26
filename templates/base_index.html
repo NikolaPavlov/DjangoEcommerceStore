@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="list-group">
+                <a class="btn btn-danger" href="{% url 'index_url' %}">AllProducts</a>
+                {% for c in all_categories %}
+                    <a class='btn btn-success' href="{% url 'products_by_category_url' c.pk %}">{{ c.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="col-md-10">
+            {% block content_products %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

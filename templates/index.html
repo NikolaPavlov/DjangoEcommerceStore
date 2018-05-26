@@ -1,16 +1,12 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 
 
-{% block content %}
+{% block content_products %}
 
-    <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-            {% for c in all_categories %}
-                <a class='btn btn-success' href="{% url 'products_by_category_url' c.pk %}">{{ c.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
 
+    <h3 class="text-center">All products:</h3>
+
+    <a class='btn btn-info' href="{% url 'products_by_name_url'  %}">Order By Name</a>
 
     <div class="card-group">
         {% for item in items %}
@@ -19,22 +15,18 @@
                     <img  src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.name }} img" class="card-img-top" class="img-fluid" width="300" height="300">
                     <div class="card-block">
                         <h4 class="card-title">{{ item.name }}</h4>
-                        <p class="card-text">{{ item.description }}</p>
-                        <p class="card-text">Price:{{ item.price }}</p>
+                        <p class="card-text">{{ item.description|slice:'100' }}</p>
                     </div>
                     <div class="card-footer">
-                        <p>footer</p>
+                        <p>Price:{{ item.price }}$</p>
                     </div>
                 </div>
             </a>
         {% endfor %}
     </div>
 
+    {% include "pagination.html" %}
 
-    <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-            {% include "pagination.html" %}
-        </div>
-    </div>
+
 
 {% endblock %}

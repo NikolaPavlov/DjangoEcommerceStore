@@ -1,5 +1,9 @@
 from django.db import models
+from django.conf import settings
 
+from users.models import User
+
+User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class Category(models.Model):

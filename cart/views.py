@@ -30,4 +30,3 @@ def remove_from_cart(request, cart_id, product_id):
     cart_obj, is_new_obj = Cart.objects.new_or_get(request)
     cart_obj.products.remove(product_obj)
     return redirect('cart:cart_home_url')
-
