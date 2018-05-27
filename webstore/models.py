@@ -19,11 +19,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)  # required True
+    name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     category = models.ManyToManyField('Category')
     image = ImageField(upload_to='img/')
+
+    def get_categories(self):
+        return ([c for c in self.category.all()])
 
     def __str__(self):
         return self.name
