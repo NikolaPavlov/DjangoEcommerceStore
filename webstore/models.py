@@ -25,5 +25,9 @@ class Product(models.Model):
     category = models.ManyToManyField('Category')
     image = ImageField(upload_to='img/')
 
+    def get_categories(self):
+        # return "\n".join([c.name for c in self.category.all()])
+        return ([c for c in self.category.all()])
+
     def __str__(self):
         return self.name
