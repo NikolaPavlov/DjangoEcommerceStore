@@ -7,8 +7,10 @@
 
 
 ## ToDo:
-  * Frontend should be better
+  * Frontend should be better.
 
-  * Need to improve order page in the admin
+  * Need to improve order page in the admin.
 
   * Should add quantity in the cart, User can't buy more than one of the same product.
+
+  * Write tests.
