@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from .models import Cart
 from webstore.models import Product
 
-
 # Create your views here.
+
 
 def cart_home(request):
     cart_obj, is_new_obj = Cart.objects.new_or_get(request)
@@ -21,7 +21,7 @@ def cart_update(request):
         else:
             cart_obj.products.add(product_obj)
         request.session['cart_items'] = cart_obj.products.count()
-#
+
     return redirect('cart:cart_home_url')
 
 

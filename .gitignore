@@ -36,7 +36,7 @@ coverage.xml
 
 
 
-./media/img/*
+/media/
 env/
 .env
 *.pyc

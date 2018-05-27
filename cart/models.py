@@ -1,4 +1,4 @@
-from decimal import *
+from decimal import Decimal
 
 from django.db import models
 from django.conf import settings
@@ -9,6 +9,7 @@ from webstore.models import Product
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
+
 
 class CartManager(models.Manager):
     def new_or_get(self, request):
@@ -37,16 +38,23 @@ class CartManager(models.Manager):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, blank=True)
-    # total_price = models.PositiveIntegerField(default=0)
-    total_price = models.DecimalField(max_digits=6, decimal_places=2,
-                                      blank=True,null=True)
+    total_price = models.DecimalField(max_digits=6,
+                                      decimal_places=2,
+                                      blank=True,
+                                      null=True)
 
     objects = CartManager()
 
     def __str__(self):
         return str(self.id)
+
+    def get_products(self):
+        return ([p for p in self.products.all()])
 
 
 def pre_save_cart_receiver(sender, instance, action, *args, **kwargs):
@@ -57,5 +65,6 @@ def pre_save_cart_receiver(sender, instance, action, *args, **kwargs):
             total_price += product.price
         instance.total_price = total_price
         instance.save()
+
 
 m2m_changed.connect(pre_save_cart_receiver, sender=Cart.products.through)

@@ -128,16 +128,14 @@ USE_TZ = True
 
 
 
+### my settings ###
 AUTH_USER_MODEL = 'users.User'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 
-
-
 LOGIN_URL = '/users/login'
-
 
 THUMBNAIL_ALIASES = {
     '': {
