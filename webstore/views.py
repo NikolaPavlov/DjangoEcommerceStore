@@ -11,27 +11,29 @@ def products(request):
     products = Product.objects.all()
     all_categories = Category.objects.all()
     pages = pagination(request, products, 10)
-
-    print(request.session.__str__())
-
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
         'all_categories': all_categories,
         'items': pages[0],
         'page_range': pages[1],
+        'cart': cart_obj,
     }
 
     return render(request, 'index.html', context)
+
 
 def products_by_name(request):
     products = Product.objects.all().order_by('name')
     all_categories = Category.objects.all()
     pages = pagination(request, products, 10)
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
         'all_categories': all_categories,
         'items': pages[0],
-        'page_range': pages[1]
+        'page_range': pages[1],
+        'cart': cart_obj,
     }
 
     return render(request, 'index.html', context)
@@ -42,12 +44,14 @@ def products_by_category(request, pk):
     products = Product.objects.filter(category=selected_category)
     all_categories = Category.objects.all()
     pages = pagination(request, products, 10)
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
         'all_categories': all_categories,
         'items': pages[0],
         'page_range': pages[1],
-        'category': selected_category
+        'category': selected_category,
+        'cart': cart_obj,
     }
 
     return render(request, 'products_by_category.html', context)
@@ -58,12 +62,14 @@ def products_in_cat_by_name(request, pk):
     products = Product.objects.filter(category=selected_category).order_by('name')
     all_categories = Category.objects.all()
     pages = pagination(request, products, 10)
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
         'all_categories': all_categories,
         'items': pages[0],
         'page_range': pages[1],
-        'category': selected_category
+        'category': selected_category,
+        'cart': cart_obj,
     }
 
     return render(request, 'products_by_category.html', context)
@@ -71,7 +77,6 @@ def products_in_cat_by_name(request, pk):
 
 class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
-
     queryset = Product.objects.all()
 
     def get_context_data(self, *args, **kwargs):

@@ -5,7 +5,13 @@ from .models import User
 # Register your models here.
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('first_name','last_name','username', 'email', 'country', 'city', 'shipping_addr')
+    list_display = ('first_name',
+                    'last_name',
+                    'username',
+                    'email',
+                    'country',
+                    'city',
+                    'shipping_addr')
 
 
 admin.site.register(User, UserAdmin)

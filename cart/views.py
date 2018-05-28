@@ -29,4 +29,5 @@ def remove_from_cart(request, cart_id, product_id):
     product_obj = Product.objects.get(id=product_id)
     cart_obj, is_new_obj = Cart.objects.new_or_get(request)
     cart_obj.products.remove(product_obj)
+    request.session['cart_items'] = cart_obj.products.count()
     return redirect('cart:cart_home_url')
